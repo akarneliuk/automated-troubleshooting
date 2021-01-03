@@ -4,8 +4,8 @@ Here you can find some Python scripts aiming to help you with the troubleshootin
 ## Index
 Script | Description
 --- | --- 
- [get_public_ip.py](https://github.com/akarneliuk/nornir-network-functional/get_public_ip.py) | Resolving your public IP and printing to stdout
- [get_speed.py](https://github.com/akarneliuk/nornir-network-functional/get_speed.py) | Measuring the speed of your internet connectivity and mailing to you
+ [get_public_ip.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/get_public_ip.py) | Resolving your public IP and printing to stdout
+ [get_speed.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/get_speed.py) | Measuring the speed of your internet connectivity and mailing to you
 
 ## Want to learn more?
 We have something for you:
