@@ -9,8 +9,8 @@ Script | Description
 
 ## Want to learn more?
 We have something for you:
-- [Advanced network automatoion](https://training.karneliuk.com/forms/) - All you need to know and can about the network automation: XML/JSON/YAML/Protobuf, SSH/NETCONF/RESTCONF/GNMI, Bash/Ansible/Python, and many more.
-- [Network automatoion with Nornir](https://training.karneliuk.com/network-automation-with-nornir/) - Usage of the Nornir for the automation of the networks and not only.
+- [Advanced network automation](https://training.karneliuk.com/forms/) - All you need to know and can about the network automation: XML/JSON/YAML/Protobuf, SSH/NETCONF/RESTCONF/GNMI, Bash/Ansible/Python, and many more.
+- [Network automation with Nornir](https://training.karneliuk.com/network-automation-with-nornir/) - Usage of the Nornir for the automation of the networks and not only.
 
 ## Versionining 
 Current release is `0.0.2`.
