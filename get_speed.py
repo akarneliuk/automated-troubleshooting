@@ -24,7 +24,7 @@ mail = {'server': 'mail.com', 'port': 465, 'password': getpass('Mail password > 
 
 # Body
 if __name__ == "__main__":
-    speed_details = json.loads(subprocess.run(['/Users/anton.karneliuk/Downloads/ookla-speedtest-1.0.0-macosx/speedtest', '-f', 'json'], stdout=subprocess.PIPE).stdout.decode('utf-8'))
+    speed_details = json.loads(subprocess.run(['speedtest', '-f', 'json'], stdout=subprocess.PIPE).stdout.decode('utf-8'))
     result = f"Request completed at: {datetime.datetime.now()}\nYour Downlink BW is {speed_details['download']['bandwidth']} bps and Uplink BW is {speed_details['upload']['bandwidth']} bps"
 
     # Mailing report
