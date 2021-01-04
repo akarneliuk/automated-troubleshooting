@@ -13,6 +13,6 @@ We have something for you:
 - [Network automation with Nornir](https://training.karneliuk.com/network-automation-with-nornir/) - Usage of the Nornir for the automation of the networks and not only.
 
 ## Versionining 
-Current release is `0.0.2`.
+Current release is `0.0.3`.
 
 (c)2020-2021, karneliuk.com
