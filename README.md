@@ -15,4 +15,7 @@ We have something for you:
 ## Versionining 
 Current release is `0.0.3`.
 
+## Applicability
+Any *-NIX based system (e.g., Linux, Unix, MAC OS). In fact, those Python scipts perfectly run on Raspbery PI as well (tested at PI 4B).
+
 (c)2020-2021, karneliuk.com
