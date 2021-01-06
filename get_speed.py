@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#(c)2021, karneliuk.com
+#(c)2019-2021, karneliuk.com
 
 """
 This tool mails the results of the speedtest to the destination mail address.
@@ -24,8 +24,9 @@ mail = {'server': 'mail.com', 'port': 465, 'password': getpass('Mail password > 
 
 # Body
 if __name__ == "__main__":
+    t1 = datetime.datetime.now()
     speed_details = json.loads(subprocess.run(['speedtest', '-f', 'json'], stdout=subprocess.PIPE).stdout.decode('utf-8'))
-    result = f"Request completed at: {datetime.datetime.now()}\nYour Downlink BW is {speed_details['download']['bandwidth'] * 8} bps and Uplink BW is {speed_details['upload']['bandwidth'] * 8} bps"
+    result = f"Request started at: {t1}\nRequested completed within: {datetime.datetime.now() - t1}\nYour Downlink BW is {speed_details['download']['bandwidth'] * 8} bps and Uplink BW is {speed_details['upload']['bandwidth'] * 8} bps"
     print(result)
 
     # Mailing report

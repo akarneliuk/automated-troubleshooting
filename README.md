@@ -13,7 +13,7 @@ We have something for you:
 - [Network automation with Nornir](https://training.karneliuk.com/network-automation-with-nornir/) - Usage of the Nornir for the automation of the networks and not only.
 
 ## Versionining 
-Current release is `0.0.3`.
+Current release is `0.0.4`.
 
 ## Applicability
 Any *-NIX based system (e.g., Linux, Unix, MAC OS). In fact, those Python scipts perfectly run on Raspbery PI as well (tested at PI 4B).
