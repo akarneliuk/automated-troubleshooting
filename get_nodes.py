@@ -145,7 +145,7 @@ def get_neighbors(hp):
 
         # Creating dictionary out of raw ARP table
         for entry in raw_lol:
-            if not re.match("incomplete", entry[3]):
+            if not re.match(".*incomplete.*", entry[3]):
                 tc = {}
 
                 # Selecting IP
