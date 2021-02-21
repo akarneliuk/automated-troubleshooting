@@ -6,7 +6,7 @@ Script | Description
 --- | --- 
  [get_public_ip.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/get_public_ip.py) | Resolving your public IP and printing to stdout
  [get_speed.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/get_speed.py) | Measuring the speed of your internet connectivity and mailing to you
- [measure_speed.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/measure_speed.py) | Run the client side of the iperf3 session to a default port and save the output. Executed as `./measure_speed.py iperf3_server_ip`. Asdd it to cron as: `0 * * * * /home/aaa/Dev/automated-troubleshooting/measure_speed.py 192.168.1.67` in `crontab -e` in CentOS.
+ [measure_speed.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/measure_speed.py) | Run the client side of the iperf3 session to a default port and save the output. Executed as `./measure_speed.py iperf3_server_ip`. Add it to cron as: `0 * * * * /home/aaa/Dev/automated-troubleshooting/measure_speed.py 192.168.1.67` in `crontab -e` in CentOS.
  [get_nodes.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/get_nodes.py) | Generate the list of the hosts live in either your local subnet or in a chosen destination.
 
 ## Want to learn more?
