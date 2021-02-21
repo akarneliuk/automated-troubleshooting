@@ -85,7 +85,7 @@ def awake_neighbors(ip_list: list, mode: str):
         ip_list = [f"{'.'.join(ip.split('.')[0:3])}.0/24" for ip in ip_list]
 
     for entry in ip_list:
-        raw_data = subprocess.run(["fping", "-4", "-g", entry, "-a", "-q"], capture_output=True).stdout.decode("utf-8")
+        raw_data = subprocess.run(["fping", "-g", entry, "-a", "-q"], capture_output=True).stdout.decode("utf-8")
         result.extend(raw_data.splitlines())
     
     return result
@@ -145,7 +145,7 @@ def get_neighbors(hp):
 
         # Creating dictionary out of raw ARP table
         for entry in raw_lol:
-            if entry[3] != "(incomplete)":
+            if not re.match("incomplete", entry[3]):
                 tc = {}
 
                 # Selecting IP
