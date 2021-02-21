@@ -1,3 +1,5 @@
 **/venv/
 **/.vscode/
 **/reports/
+**/.cache/
+**/__pycache__/

@@ -1,0 +1,10 @@
+---
+# This file contains the configuration variables for the tools
+# Provided in this toolkit
+urls:
+  geo_ip: https://api.myip.com
+  mac_db: http://standards-oui.ieee.org/oui/oui.txt
+paths:
+  cache: ./.cache
+  output: ./results
+...
