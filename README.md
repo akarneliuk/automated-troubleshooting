@@ -5,9 +5,9 @@ Here you can find some Python scripts aiming to help you with the troubleshootin
 Script | Description
 --- | --- 
  [get_public_ip.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/get_public_ip.py) | Resolving your public IP and printing to stdout
- [get_speed.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/get_speed.py) | Measuring the speed of your internet connectivity and mailing to you
- [measure_speed.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/measure_speed.py) | Run the client side of the iperf3 session to a default port and save the output. Executed as `./measure_speed.py iperf3_server_ip`. Add it to cron as: `0 * * * * /home/aaa/Dev/automated-troubleshooting/measure_speed.py 192.168.1.67` in `crontab -e` in CentOS.
- [get_nodes.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/get_nodes.py) | Generate the list of the hosts live in either your local subnet or in a chosen destination.
+ [get_speed.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/get_speed.py) | Measuring the speed of your internet connectivity and mailing to you. Requires speedtest installation.
+ [measure_speed.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/measure_speed.py) | Run the client side of the iperf3 session to a default port and save the output. Executed as `./measure_speed.py iperf3_server_ip`. Add it to cron as: `0 * * * * /home/aaa/Dev/automated-troubleshooting/measure_speed.py 192.168.1.67` in `crontab -e` in CentOS. Requires iperf3 installation.
+ [get_nodes.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/get_nodes.py) | Generate the list of the hosts live in either your local subnet or in a chosen destination. Requires fping installation.
 
 ## Want to learn more?
 We have something for you:
