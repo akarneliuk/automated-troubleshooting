@@ -40,8 +40,12 @@ def args_parser():
                         help="Provide the execution mode. Options: local or remote.")
     parser.add_argument("--targets", dest="targets", type=str, default="",
                         help="Provide the list of the IP ranges to be checked. Works with remote.")
-    parser.add_argument("--detailed", dest="detailed", type=bool, default=False,
+    parser.add_argument("--detailed", action="store_true",
                         help="Specify if you want to get detailed info about local neigbors. Works with local.")
+    parser.add_argument("--ipv4", action="store_true",
+                        help="Specify if you want to check IPv4 reachability.")
+    parser.add_argument("--ipv6", action="store_true",
+                        help="Specify if you want to check IPv6 reachability.")
 
     result = parser.parse_args()
     result.targets = result.targets.split(",")
@@ -51,6 +55,10 @@ def args_parser():
 
     if result.mode == "remote" and not result.targets:
         sys.exit("The remote mode is chosen, but no ranges provided.")
+
+    # Setting default mode to IPv4
+    if not result.ipv4 and not result.ipv6:
+        result.ipv4 = True
 
     return result
 
@@ -68,26 +76,80 @@ def get_host_details():
     # Collecting IP addresses of the host
     ip_address = socket.gethostbyname_ex(hostname)
 
-    result = {"hp": hp, "hostname": hostname, "ipv4_addresses": ip_address[-1]}
+    local_networks = []
+    tc = None
+
+    raw_data = subprocess.run(["ifconfig"], capture_output=True).stdout.decode("utf-8")
+    raw_data = raw_data.splitlines()
+
+    for raw_line in  raw_data:
+        if re.match("^\w+?", raw_line):
+            if tc:
+                local_networks.append(tc)
+
+            tc = {"interface": raw_line.split(":")[0], "ipv4": [], "ipv6": []}
+
+        # Subtracting IPv4 addresses excluding looback
+        elif re.match("\s+inet\s+.*", raw_line) and not re.match(".*\s+127\..*", raw_line):
+            tip = raw_line.split(" ")[1]
+
+            # Converting Hex to prefix length
+            if hp.system == "Darwin":
+                tpx = bin(int(raw_line.split(" ")[3], 16))[2:]
+                tpx = len([elem for elem in tpx if elem == "1"])
+            # Converting dotted decial to prefix length
+            else:
+                tpx = raw_line.split(" ")[3]
+
+            tc["ipv4"].append(f"{tip}/{tpx}")
+
+        # Subtracting IPv6 addresses excluding link-local addresses
+        elif re.match("\s+inet6\s+.*", raw_line) and not (re.match(".*\s+fe80:.*", raw_line) or re.match(".*\s+::1\s+.*", raw_line)):
+            tip = raw_line.split(" ")[1]
+            tpx = raw_line.split(" ")[3]
+
+            tc["ipv6"].append(f"{tip}/{tpx}")
+
+    result = {"hp": hp, "hostname": hostname, "networks": local_networks}
 
     return result
 
 
-def awake_neighbors(ip_list: list, mode: str):
+def awake_neighbors(ip_list: list, args):
     """
     This functions runs fping for the connected subnets to force hosts to appear
     in ARP table
     """
     # Local vars
     result = []
-    # Adding the prefix (default assumption that prefix is /24)
-    if mode == "local":
-        ip_list = [f"{'.'.join(ip.split('.')[0:3])}.0/24" for ip in ip_list]
+    restructured_ip_list = {"ipv4": [], "ipv6": []}
 
-    for entry in ip_list:
-        raw_data = subprocess.run(["fping", "-g", entry, "-a", "-q"], capture_output=True).stdout.decode("utf-8")
-        result.extend(raw_data.splitlines())
-    
+    # Adding the prefix (default assumption that prefix is /24)
+    if args.mode == "local":
+        for entry in ip_list:
+            restructured_ip_list["ipv4"].extend(entry["ipv4"])
+            restructured_ip_list["ipv6"].extend(entry["ipv6"])
+
+    else:
+        for entry in ip_list:
+            if re.match("\d+\.\d+\.\d+\.\d+/\d+", entry):
+                restructured_ip_list["ipv4"].append(entry)
+
+            elif re.match("[0-9A-Fa-f:]+?/*d*", entry):
+                restructured_ip_list["ipv6"].append(entry)
+
+    # Validating the reachebility of IPV4 host
+    if args.ipv4:
+        for entry in restructured_ip_list["ipv4"]:
+            raw_data = subprocess.run(["fping", "-4", "-g", entry, "-a", "-q"], capture_output=True).stdout.decode("utf-8")
+            result.extend(raw_data.splitlines())
+
+    # Validating the reachebility of IPV6 host
+    if args.ipv6:
+        for entry in restructured_ip_list["ipv6"]:
+            raw_data = subprocess.run(["fping", "-6", entry, "-a", "-q"], capture_output=True).stdout.decode("utf-8")
+            result.extend(raw_data.splitlines())
+
     return result
 
 
@@ -234,10 +296,10 @@ if __name__ == "__main__":
 
     # Collecting info about live hosts
     if args.mode == "remote":
-        live_hosts = awake_neighbors(args.targets, args.mode)
+        live_hosts = awake_neighbors(args.targets, args)
 
     else: 
-        live_hosts = awake_neighbors(host_data["ipv4_addresses"], args.mode)
+        live_hosts = awake_neighbors(host_data["networks"], args)
 
         if args.detailed:
             macdb = get_file(url=config["urls"]["mac_db"], rdir=config["paths"]["cache"])
