@@ -92,7 +92,7 @@ def get_host_details():
         # Subtracting IPv4 addresses excluding looback
         elif re.match("\s+inet\s+.*", raw_line) and not re.match(".*\s+127\..*", raw_line):
             tip = re.sub("^.+inet\s+([\d\.]+)\s+.*", "\g<1>", raw_line)
-            tpx = re.sub("^.+netmask\s+([\d\.]+)\s+.*", "\g<1>", raw_line)
+            tpx = re.sub("^.+netmask\s+([\w\.]+)\s+.*", "\g<1>", raw_line)
 
             # Converting Hex to prefix length
             if hp.system == "Darwin":
