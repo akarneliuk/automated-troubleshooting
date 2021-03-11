@@ -91,22 +91,24 @@ def get_host_details():
 
         # Subtracting IPv4 addresses excluding looback
         elif re.match("\s+inet\s+.*", raw_line) and not re.match(".*\s+127\..*", raw_line):
-            tip = raw_line.split(" ")[1]
+            tip = re.sub("^.+inet\s+([\d\.]+)\s+.*", "\g<1>", raw_line)
+            tpx = re.sub("^.+netmask\s+([\d\.]+)\s+.*", "\g<1>", raw_line)
 
             # Converting Hex to prefix length
             if hp.system == "Darwin":
-                tpx = bin(int(raw_line.split(" ")[3], 16))[2:]
-                tpx = len([elem for elem in tpx if elem == "1"])
+                tpx = bin(int(tpx, 16))[2:]
             # Converting dotted decial to prefix length
             else:
-                tpx = raw_line.split(" ")[3]
+                tpx = "".join([bin(int(e))[2:] for e in tpx.split(".")])
+
+            tpx = len([elem for elem in tpx if elem == "1"])
 
             tc["ipv4"].append(f"{tip}/{tpx}")
 
         # Subtracting IPv6 addresses excluding link-local addresses
         elif re.match("\s+inet6\s+.*", raw_line) and not (re.match(".*\s+fe80:.*", raw_line) or re.match(".*\s+::1\s+.*", raw_line)):
-            tip = raw_line.split(" ")[1]
-            tpx = raw_line.split(" ")[3]
+            tip = re.sub("^.+inet6\s+([\w:]+)\s+.*", "\g<1>", raw_line)
+            tpx = re.sub("^.+prefixlen\s+([\d]+)\s+.*", "\g<1>", raw_line)
 
             tc["ipv6"].append(f"{tip}/{tpx}")
 
