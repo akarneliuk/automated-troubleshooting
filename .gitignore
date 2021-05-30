@@ -3,3 +3,6 @@
 **/reports/
 **/.cache/
 **/__pycache__/
+gconfig.yml
+trace_map.html
+trace_isp.html
