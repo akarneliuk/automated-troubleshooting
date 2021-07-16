@@ -3,3 +3,4 @@
 **/reports/
 **/.cache/
 **/__pycache__/
+**/results.csv
