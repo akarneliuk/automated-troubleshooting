@@ -8,12 +8,9 @@ Script | Description
  [get_speed.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/get_speed.py) | Measuring the speed of your internet connectivity and mailing to you. Requires `speedtest` installation at Your Linux/MAC.
  [measure_speed.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/measure_speed.py) | Run the client side of the iperf3 session to a default port and save the output. Executed as `./measure_speed.py iperf3_server_ip`. Add it to cron as: `0 * * * * /home/aaa/Dev/automated-troubleshooting/measure_speed.py 192.168.1.67` in `crontab -e` in CentOS. Requires `iperf3` installation at Your Linux/MAC.
  [get_nodes.py](https://github.com/akarneliuk/automated-troubleshooting/blob/main/get_nodes.py) | Generate the list of the hosts live in either your local subnet or in a chosen destination. Requires `fping` installation at Your Linux/MAC.
-<<<<<<< HEAD
+ [shell_tools.sh](https://github.com/akarneliuk/automated-troubleshooting/blob/main/shell_tools.sh) | Install the necessary tools (e.g., iperf3, fping, etc) at your Operating System
  [bash_cumulus_vxlan.sh](https://github.com/akarneliuk/automated-troubleshooting/blob/main/bash_cumulus_vxlan.sh) | Genrate IP/MAC/VLAN/VTEP mapping for Cumulus Linux
  [bash_measure_packet_loss.sh](https://github.com/akarneliuk/automated-troubleshooting/blob/main/bash_measure_packet_loss.sh) | Measure the packet loss towards the list of destinations
-=======
- [shell_tools.sh](https://github.com/akarneliuk/automated-troubleshooting/blob/main/shell_tools.sh) | Install the necessary tools (e.g., iperf3, fping, etc) at your Operating System
->>>>>>> 1f7aaff5ee5d50be5704292cf181cadb90bd5b7d
 
 ## Want to learn more?
 We have something for you:
@@ -21,11 +18,7 @@ We have something for you:
 - [Network automation with Nornir](https://training.karneliuk.com/network-automation-with-nornir/) - Usage of the Nornir for the automation of the networks and not only.
 
 ## Release 
-<<<<<<< HEAD
-Current release is `0.2.0`.
-=======
-Current release is `0.2.1`.
->>>>>>> 1f7aaff5ee5d50be5704292cf181cadb90bd5b7d
+Current release is `0.2.2`.
 
 ## Applicability
 Any *-NIX based system (e.g., Linux, Unix, MAC OS). In fact, those Python scipts perfectly run on Raspbery PI as well (tested at PI 4B).
