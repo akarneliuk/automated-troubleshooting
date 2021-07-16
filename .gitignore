@@ -3,4 +3,10 @@
 **/reports/
 **/.cache/
 **/__pycache__/
+<<<<<<< HEAD
 **/results.csv
+=======
+gconfig.yml
+trace_map.html
+trace_isp.html
+>>>>>>> 1f7aaff5ee5d50be5704292cf181cadb90bd5b7d
